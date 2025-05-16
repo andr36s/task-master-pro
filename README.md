@@ -1,12 +1,12 @@
 # 🧠 TaskMaster Pro – App de Gestión Personal Todo-en-Uno
 
-**TaskMaster Pro** es una aplicación web interactiva desarrollada con **HTML, CSS y JavaScript puro**, diseñada para ayudarte a gestionar tu productividad diaria. Permite llevar el control de tareas, hábitos, contactos y estadísticas de rendimiento personal, todo desde un solo lugar.
+**TaskMaster Pro** es una aplicación web interactiva desarrollada con **HTML, CSS y JavaScript puro**, diseñada para ayudarte a gestionar tu productividad diaria. Una app web donde puedes:
 
----
-
-## 📸 Vista previa
-
-![TaskMaster Pro Screenshot](./preview.png) <!-- Cambia esto por una imagen real de tu proyecto -->
+- Crear y gestionar tareas.
+- Llevar un registro de hábitos y actividades.
+- Consultar el clima (API opcional).
+- Ver estadísticas simples de su productividad.
+- Registrar contactos o clientes (modo freelancer).
 
 ---
 
@@ -66,3 +66,17 @@
 ---
 
 ## 📁 Estructura del Proyecto
+
+taskmaster-pro/
+│
+├── index.html
+├── styles.css
+├── app.js
+├── /components/
+│   ├── tareas.js
+│   ├── habitos.js
+│   ├── contactos.js
+│   ├── stats.js
+│   └── conversor.js
+└── /data/
+    └── db.json (si simulas backend o usas localStorage)
