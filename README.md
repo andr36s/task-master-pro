@@ -64,19 +64,3 @@
 - **LocalStorage** – persistencia de datos sin backend.
 
 ---
-
-## 📁 Estructura del Proyecto
-
-taskmaster-pro/
-
-- index.html
-- styles.css
-- app.js
-- /components/
-    - tareas.js
-    - habitos.js
-    - contactos.js
-    - stats.js
-    - conversor.js
-- /data/
-    - db.json (si simulas backend o usas localStorage)
