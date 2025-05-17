@@ -4,9 +4,9 @@
 
 - Crear y gestionar tareas.
 - Llevar un registro de hábitos y actividades.
-- Consultar el clima (API opcional).
+- Consultar el clima (API).
 - Ver estadísticas simples de su productividad.
-- Registrar contactos o clientes (modo freelancer).
+- Registrar contactos o clientes.
 
 ---
 
