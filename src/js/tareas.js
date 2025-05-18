@@ -12,12 +12,12 @@
     formTarea.addEventListener("submit", (evento) => {
         evento.preventDefault();
 
-        const nombre = inputNombreTarea.value.trim();
-        const prioridad = selectPrioridadTarea.value;
-        const fecha = inputFechaTarea.value ? inputFechaTarea.value : "No registra";;
+        let nombre = inputNombreTarea.value.trim();
+        let prioridad = selectPrioridadTarea.value;
+        let fecha = inputFechaTarea.value ? inputFechaTarea.value : "No registra";
 
         if (editandoTarea) {
-            editandoTarea.querySelector(".contenido-tarea").textContent = `${inputNombreTarea.value} - ${selectPrioridadTarea.value} - ${inputFechaTarea.value}`;
+            editandoTarea.querySelector(".contenido-tarea").textContent = `${nombre} - ${prioridad} - ${fecha}`;
 
             h5TituloAgregarTarea.textContent = "Agregar tarea";
             buttonBtnGuardar.textContent = "Guardar tarea";
@@ -38,9 +38,12 @@
                 h5TituloAgregarTarea.textContent = "Modificar Tarea";
                 buttonBtnGuardar.textContent = "Guardar Cambios";
 
-                inputNombreTarea.value = nombre;
-                selectPrioridadTarea.value = prioridad;
-                inputFechaTarea.value = fecha;
+                const contenidoTarea = liTarea.querySelector(".contenido-tarea").textContent;
+                const [nombreActual, prioridadActual, fechaActual] = contenidoTarea.split(" - ");
+
+                inputNombreTarea.value = nombreActual;
+                selectPrioridadTarea.value = prioridadActual;
+                inputFechaTarea.value = fechaActual ? fechaActual : "No registra";
 
                 editandoTarea = liTarea;
             })
