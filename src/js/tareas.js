@@ -84,7 +84,7 @@ const mostrarTareas = () => {
         ulListaTareas.appendChild(li);
     });
 }
-//Eventos
+//Eventoss
 formTarea.addEventListener("submit", manejarEnvioFormulario);
 console.log(filtroTarea);
 
