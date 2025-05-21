@@ -35,13 +35,15 @@
           </form>
         </div>
         <div class="col-sm-8 contenido-tareas">
+          <select id="filtro-tarea" class="filtro-tarea" name="filtro" required>
+                <option value="" disabled selected>FILTRO POR ESTADO</option>
+                <option value="Todas">Todas</option>
+                <option value="Completadas">Completadas</option>
+                <option value="Pendientes">Pendientes</option>
+              </select>
             <ul id="lista-tareas">
-              <li><span>Nombre tarea - Nivel - Fecha - Modificar - Eliminar</span></li>
             </ul>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-sm">col-sm</div>
       </div>
     </div>
 
