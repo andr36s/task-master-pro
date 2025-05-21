@@ -1,66 +1,36 @@
-# 🧠 TaskMaster Pro – App de Gestión Personal Todo-en-Uno
+# 🧠 TaskMaster Pro – App de Gestión Personal
 
-**TaskMaster Pro** es una aplicación web interactiva desarrollada con **HTML, CSS y JavaScript puro**, diseñada para ayudarte a gestionar tu productividad diaria. Una app web donde puedes:
-
-- Crear y gestionar tareas.
-- Llevar un registro de hábitos y actividades.
-- Consultar el clima (API).
-- Ver estadísticas simples de su productividad.
-- Registrar contactos o clientes.
+**TaskMaster Pro** es una aplicación web desarrollada con **HTML, CSS y JavaScript puro**, diseñada para ayudarte a gestionar tus tareas, mantener hábitos saludables y visualizar tu progreso diario y semanal.
 
 ---
 
 ## 🚀 Funcionalidades principales
 
 ### ✅ Gestor de Tareas (To-Do Pro)
-
-- Agrega tareas con nombre, prioridad y fecha límite.
-- Marca tareas como completadas o pendientes.
-- Elimina o edita tareas existentes.
-- Filtros por estado (Todas, Completadas, Pendientes).
-- Guardado automático con `localStorage`.
-
----
+- Crear tareas con nombre, prioridad y fecha límite.
+- Marcar tareas como completadas o pendientes.
+- Editar y eliminar tareas.
+- Filtrar por estado: Todas, Completadas o Pendientes.
+- Persistencia de datos mediante `localStorage`.
 
 ### ✅ Seguimiento de Hábitos
-
-- Crea hábitos (ej: "Leer", "Hacer ejercicio", etc).
-- Marca hábitos diarios como hechos/no hechos.
-- Historial semanal de cumplimiento.
-- Visualización estilo mini-calendario.
-
----
-
-### ✅ Agenda de Contactos
-
-- Agrega contactos con nombre, teléfono y notas.
-- Elimina contactos.
-- Filtrado y ordenamiento alfabético.
-
----
+- Crear hábitos personalizados (por ejemplo: "Leer", "Ejercicio").
+- Marcar hábitos diarios como hechos o no hechos.
+- Visualizar historial semanal en formato tipo calendario.
+- Datos guardados localmente con `localStorage`.
 
 ### ✅ Panel de Estadísticas
-
-- Visualiza cuántas tareas completaste esta semana.
-- Porcentaje de hábitos cumplidos.
-- Total de contactos registrados.
-- (Extra: integración opcional con librerías como Chart.js).
-
----
-
-### ✅ Herramientas Extra
-
-- Conversor de moneda (COP a USD/EUR).
-- Cronómetro tipo Pomodoro.
-- Calculadora de productividad (tareas vs tiempo estimado).
+- Ver la cantidad de tareas completadas esta semana.
+- Consultar el porcentaje de hábitos cumplidos en los últimos 7 días.
+- Visualización opcional con gráficos usando **Chart.js**.
 
 ---
 
 ## 💻 Tecnologías usadas
 
-- **HTML5** – estructura semántica.
-- **CSS3** – diseño responsive y moderno.
-- **JavaScript (ES6)** – lógica, DOM, eventos, funciones.
-- **LocalStorage** – persistencia de datos sin backend.
+- **HTML5** – estructura semántica y accesible.
+- **CSS3** – diseño limpio y responsive.
+- **JavaScript (ES6)** – lógica de la app, eventos y manipulación del DOM.
+- **LocalStorage** – almacenamiento persistente sin backend.
 
 ---
