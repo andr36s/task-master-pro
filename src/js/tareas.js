@@ -1,68 +1,96 @@
+const formTarea = document.querySelector("#formulario-tareas");
+const ulListaTareas = document.querySelector("#lista-tareas");
+const h5TituloAgregarTarea = document.querySelector("#titulo-agregar-tarea");
+const buttonBtnGuardar = document.querySelector(".btn-guardar");
+const inputNombreTarea = document.querySelector("#nombre-tarea");
+const selectPrioridadTarea = document.querySelector("#prioridad-tarea");
+const inputFechaTarea = document.querySelector("#fecha-tarea");
+const filtroTarea = document.querySelectorAll(".filtro-tarea");
 
-    const formTarea = document.querySelector("#formulario-tareas");
-    const ulListaTareas = document.querySelector("#lista-tareas");
-    const h5TituloAgregarTarea = document.querySelector("#titulo-agregar-tarea");
-    const buttonBtnGuardar = document.querySelector(".btn-guardar");
-    const inputNombreTarea = document.querySelector("#nombre-tarea");
-    const selectPrioridadTarea = document.querySelector("#prioridad-tarea");
-    const inputFechaTarea = document.querySelector("#fecha-tarea");
-    
-    let editandoTarea = null;
-    
-    formTarea.addEventListener("submit", (evento) => {
-        evento.preventDefault();
+let tareas = JSON.parse(localStorage.getItem("tareas")) || [];
+let editandoTareaId = null;
+let filtroSeleccionado = "todas";
 
-        let nombre = inputNombreTarea.value.trim();
-        let prioridad = selectPrioridadTarea.value;
-        let fecha = inputFechaTarea.value ? inputFechaTarea.value : "No registra";
+//Funciones
+const manejarEnvioFormulario = (evento) => {
+    evento.preventDefault();
 
-        if (editandoTarea) {
-            editandoTarea.querySelector(".contenido-tarea").textContent = `${nombre} - ${prioridad} - ${fecha}`;
+    let nombre = inputNombreTarea.value.trim();
+    let prioridad = selectPrioridadTarea.value;
+    let fecha = inputFechaTarea.value ? inputFechaTarea.value : "No registra";
 
-            h5TituloAgregarTarea.textContent = "Agregar tarea";
-            buttonBtnGuardar.textContent = "Guardar tarea";
-            editandoTarea = null;
-        } else {
-            const liTarea = document.createElement("li");
+    if (!nombre || !prioridad) return alert("Llena los campos con *")
 
-            const spanContenido = document.createElement("span");
-            spanContenido.textContent = `${nombre} - ${prioridad} - ${fecha}`;
-            spanContenido.classList.add("contenido-tarea");
+    if (editandoTareaId) {
+        tareas = tareas.map(tarea => {
+            if (tarea.id === editandoTareaId) {
+                return {
+                    ...tarea,
+                    nombre: nombre,
+                    prioridad: prioridad,
+                    fecha: fecha
+                }
+            }
+            return tarea;
+        })
 
-            // Boton para modificar tarea de la lista
-            const modificarTarea = document.createElement("button");
-            modificarTarea.textContent = "Modificar";
-            modificarTarea.classList.add("btn", "btn-warning", "btn-sm", "mx-2");
-            modificarTarea.type = "button";
-            modificarTarea.addEventListener("click", () => {
-                h5TituloAgregarTarea.textContent = "Modificar Tarea";
-                buttonBtnGuardar.textContent = "Guardar Cambios";
+        h5TituloAgregarTarea.textContent = "Agregar tarea";
+        buttonBtnGuardar.textContent = "Guardar tarea";
+        editandoTarea = null;
+    } else {
+        // Crear un objeto tarea
+        const tarea = {
+            id: Date.now(),
+            nombre: nombre,
+            prioridad: prioridad,
+            fecha: fecha,
+            completada: false
+        }
 
-                const contenidoTarea = liTarea.querySelector(".contenido-tarea").textContent;
-                const [nombreActual, prioridadActual, fechaActual] = contenidoTarea.split(" - ");
+        // Agregar la tarea al array de tareas
+        tareas.push(tarea);
+    }
+    // Guardar las tareas en el localStorage
+    guardarTareasEnLocalStorage();
+    // Mostrar las tareas en la lista
+    mostrarTareas();
+    // Limpiar el formulario
+    formTarea.reset();
+}
 
-                inputNombreTarea.value = nombreActual;
-                selectPrioridadTarea.value = prioridadActual;
-                inputFechaTarea.value = fechaActual ? fechaActual : "No registra";
+const guardarTareasEnLocalStorage = () => {
+    localStorage.setItem("tareas", JSON.stringify(tareas));
+}   
 
-                editandoTarea = liTarea;
-            })
+const mostrarTareas = () => {
+    ulListaTareas.innerHTML = "";
 
-            // Boton para eliminar tarea de la lista
-            const buttonEliminar = document.createElement("button");
-            buttonEliminar.textContent = "Eliminar";
-            buttonEliminar.classList.add("btn", "btn-danger", "btn-sm");
-            buttonEliminar.type = "button";
-            buttonEliminar.addEventListener("click", () => liTarea.remove());
-            
-            liTarea.appendChild(spanContenido);
-            liTarea.appendChild(modificarTarea);
-            liTarea.appendChild(buttonEliminar);
-        
-            ulListaTareas.appendChild(liTarea);
-        }        
+    let tareasFiltradas = tareas;
+    if (filtroActual === "Completadas") {
+        tareasFiltradas = tareas.filter(tarea => tarea.completada === true);
+    } else if (filtroActual === "Pendientes") {
+        tareasFiltradas = tareas.filter(tarea => tarea.completada === false)
+    }
 
-        inputNombreTarea.value = "";
-        selectPrioridadTarea.value = "";
-        inputFechaTarea.value = "";
+    tareasFiltradas.forEach(tarea => {
+        const li = document.createElement("li");
+        // li.classList.add();
+
+        const span = document.createElement("span");
+        // span.className = "";
+        span.innerHTML = `<strong>${tarea.nombre}</strong> - ${tarea.prioridad} - ${tarea.fecha}`;
+        li.appendChild(span);
+
+        ulListaTareas.appendChild(li);
+    });
+}
+//Eventos
+formTarea.addEventListener("submit", manejarEnvioFormulario);
+console.log(filtroTarea);
+
+filtroTarea.forEach(cualquierCosa => {
+    cualquierCosa.addEventListener("click", () => {
+        filtroActual = cualquierCosa.value;
+        mostrarTareas();
     })
+})
