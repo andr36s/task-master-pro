@@ -36,7 +36,7 @@ const manejarEnvioFormulario = (evento) => {
 
         h5TituloAgregarTarea.textContent = "Agregar tarea";
         buttonBtnGuardar.textContent = "Guardar tarea";
-        editandoTarea = null;
+        editandoTareaId = null;
     } else {
         // Crear un objeto tarea
         const tarea = {
@@ -78,8 +78,14 @@ const mostrarTareas = () => {
 
         const span = document.createElement("span");
         span.className = "contenido-tarea";
-        span.innerHTML = `<strong>${tarea.nombre}</strong> - ${tarea.prioridad} - ${tarea.fecha}`;
+        span.innerHTML = `<strong>${tarea.nombre}</strong>, ${tarea.prioridad}, ${tarea.fecha}`;
         
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = tarea.completada;
+        checkbox.className = "checkbox-tarea";
+
+
         const buttonEditar = document.createElement("button");
         buttonEditar.textContent = "Editar";
         buttonEditar.className = "btn-editar btn btn-warning";
@@ -101,6 +107,7 @@ const mostrarTareas = () => {
             mostrarTareas();
         }
 
+        li.appendChild(checkbox);
         li.appendChild(span);
         li.appendChild(buttonEditar);
         li.appendChild(buttonEliminar);
