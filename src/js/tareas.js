@@ -75,7 +75,10 @@ const mostrarTareas = () => {
     tareasFiltradas.forEach(tarea => {
         const li = document.createElement("li");
         li.className = "d-flex justify-content-between align-items-center p-2 border";
-
+        if (tarea.completada) {
+                li.classList.add("background-checked");
+        } 
+        
         const span = document.createElement("span");
         span.className = "contenido-tarea";
         span.innerHTML = `<strong>${tarea.nombre}</strong>, ${tarea.prioridad}, ${tarea.fecha}`;
@@ -84,7 +87,12 @@ const mostrarTareas = () => {
         checkbox.type = "checkbox";
         checkbox.checked = tarea.completada;
         checkbox.className = "checkbox-tarea";
+        checkbox.addEventListener("click", () => {
+            tarea.completada = checkbox.checked;
 
+            guardarTareasEnLocalStorage();
+            mostrarTareas();
+        });
 
         const buttonEditar = document.createElement("button");
         buttonEditar.textContent = "Editar";

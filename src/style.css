@@ -126,6 +126,11 @@ input.checkbox-tarea {
   color: #355245;
 }
 
+/* CSS background-checked */
+.background-checked {
+  background-color: rgba(100, 131, 116, 0.5);
+}
+
 /* footer CSS*/
 .footer {
   background: linear-gradient(135deg, #355245, #afc1b6);
