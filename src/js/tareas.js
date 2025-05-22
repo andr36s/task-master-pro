@@ -9,7 +9,7 @@ const filtroTarea = document.querySelectorAll(".filtro-tarea");
 
 let tareas = JSON.parse(localStorage.getItem("tareas")) || [];
 let editandoTareaId = null;
-let filtroSeleccionado = "todas";
+let filtroActual = "Todas";
 
 //Funciones
 const manejarEnvioFormulario = (evento) => {
@@ -74,23 +74,48 @@ const mostrarTareas = () => {
 
     tareasFiltradas.forEach(tarea => {
         const li = document.createElement("li");
-        // li.classList.add();
+        li.className = "d-flex justify-content-between align-items-center p-2 border";
 
         const span = document.createElement("span");
-        // span.className = "";
+        span.className = "contenido-tarea";
         span.innerHTML = `<strong>${tarea.nombre}</strong> - ${tarea.prioridad} - ${tarea.fecha}`;
-        li.appendChild(span);
+        
+        const buttonEditar = document.createElement("button");
+        buttonEditar.textContent = "Editar";
+        buttonEditar.className = "btn-editar btn btn-warning";
+        buttonEditar.onclick = () => {
+            inputNombreTarea.value = tarea.nombre;
+            selectPrioridadTarea.value = tarea.prioridad;
+            inputFechaTarea.value = tarea.fecha;
+            h5TituloAgregarTarea.textContent = "Editar tarea";
+            buttonBtnGuardar.textContent = "Actualizar tarea";
+            editandoTareaId = tarea.id;
+        }
 
+        const buttonEliminar = document.createElement("button");
+        buttonEliminar.textContent = "Eliminar";
+        buttonEliminar.className = "btn-eliminar btn btn-danger";
+        buttonEliminar.onclick = () => {
+            tareas = tareas.filter(element => element.id !== tarea.id);
+            guardarTareasEnLocalStorage();
+            mostrarTareas();
+        }
+
+        li.appendChild(span);
+        li.appendChild(buttonEditar);
+        li.appendChild(buttonEliminar);
         ulListaTareas.appendChild(li);
     });
 }
+
 //Eventoss
 formTarea.addEventListener("submit", manejarEnvioFormulario);
-console.log(filtroTarea);
-
-filtroTarea.forEach(cualquierCosa => {
-    cualquierCosa.addEventListener("click", () => {
-        filtroActual = cualquierCosa.value;
+filtroTarea.forEach(selector => {
+    selector.addEventListener("click", () => {
+        filtroActual = selector.value;
         mostrarTareas();
     })
 })
+
+// Inicializar
+mostrarTareas();
